@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class MonthlyReport {
-
-    private final String FILE_NAME = "m.20210";
-    private final String EXPANSION = ".csv";
-    private final int NUMBER_MONTHLY_REPORTS = 3;
+    int quantity;
+    private static final String FILE_NAME = "m.20210";
+    private static final String EXPANSION = ".csv";
+    private static final int NUMBER_MONTHLY_REPORTS = 3;
     private boolean monthlyReportsRead = false;
     private final FileReader fileReader = new FileReader();
     private final HashMap<Integer, ArrayList<Transaction>> transactions = new HashMap<>();
@@ -22,7 +23,11 @@ public class MonthlyReport {
                 String[] fields = line.split(",");
                 String name = fields[0];
                 boolean expense = Boolean.parseBoolean(fields[1]);
-                int quantity = Integer.parseInt(fields[2]);
+
+                if (Objects.nonNull(fields[2])) {
+                    quantity = Integer.parseInt(fields[2]);
+                }
+
                 int sumOfOne = Integer.parseInt(fields[3]);
                 Transaction transaction = new Transaction(
                         name,

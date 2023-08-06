@@ -33,7 +33,7 @@ public class ReportEngine {
                 ArrayList<MonthTotalPerYear> monthTotalPerYearList = monthTotalPerYear.get(
                         i
                 );
-                yearlyReport.profitForEachMonth(i, monthTotalPerYearList);
+                yearlyReport.profitToEachMonth(i, monthTotalPerYearList);
             }
             System.out.println(
                     "Средний доход за все имеющиеся операции в году составил: " +

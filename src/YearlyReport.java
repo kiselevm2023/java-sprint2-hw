@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class YearlyReport {
-
-    private final String FILE_NAME = "y.2021.csv";
+    int month;
+    private static final String FILE_NAME = "y.2021.csv";
     private final FileReader fileReader = new FileReader();
     private boolean yearlyReportsRead = false;
     private final HashMap<Integer, ArrayList<MonthTotalPerYear>> monthsTotalPerYear = new HashMap<>();
@@ -17,10 +18,12 @@ public class YearlyReport {
             String line = contentYear.get(i);
             String[] fields = line.split(",");
 
-            int month = Integer.parseInt(fields[0]);
+            if (Objects.nonNull(fields[0])) {
+                month = Integer.parseInt(fields[0]);
+            }
+
             int amount = Integer.parseInt(fields[1]);
             boolean expense = Boolean.parseBoolean(fields[2]);
-
             MonthTotalPerYear monthTotalPerYear = new MonthTotalPerYear(
                     month,
                     amount,
@@ -44,7 +47,7 @@ public class YearlyReport {
         return monthsTotalPerYear;
     }
 
-    public void profitForEachMonth(
+    public void profitToEachMonth(
             int montNumber,
             ArrayList<MonthTotalPerYear> monthTotalPerYearList
     ) {
